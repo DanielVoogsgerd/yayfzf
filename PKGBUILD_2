@@ -1,0 +1,47 @@
+# Maintainer: Conner Will (DampSock) <conner.will@connerwill.com>
+
+## Package Name
+pkgname=yayfzf
+
+## Package Version
+pkgver=1.0.2
+
+## Package Release
+pkgrel=0
+
+## Package Description
+pkgdesc="AUR package fzf finder to search, install, remove, and manage packages using yay"
+
+## Supported Architecture
+arch=("any")
+
+## Package URLL
+url="https://github.com/ConnerWill/${pkgname}"
+
+## Package License
+license=("GPL")
+
+## Dependencies
+depends=('bash' 'fzf' 'yay')
+
+## Optional Dependencies
+optdepends=('zsh: zsh completions')
+
+## Package Source
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+
+## Package SHA265
+sha256sums=('SKIP')
+
+## Install Package
+package() {
+
+  ## Package
+  install -Dm775 "${srcdir}/${pkgname}-${pkgver}/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+
+  ## License
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+  ## Completions
+  install -m644 completion/*.zsh "${pkgdir}/usr/share/zsh/site-functions/_${pkgname}"
+}
